@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Adedonha</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #282c34;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ffccff;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            font-size: 48px;
+        }
+
+        .timer {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #ffa500;
+        }
+
+        .finished {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #28a745;
+        }
+
+        .history {
+            font-size: 14px;
+            color: #ffa500;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>A D E D O N H A</h1>
+    <div class="timer" id="selectedLetter">Letra: -</div>
+    <button id="generateLetterBtn" class="btn btn-info mt-2">Sortear Letra</button>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <!-- Os campos de entrada das palavras permanecem inalterados -->
+            <div class="form-group">
+                <label>Animal:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word1" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score1" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Cidade:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word2" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score2" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Cor:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word3" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score3" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Fruta:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word4" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score4" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>País:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word5" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score5" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Nome:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word6" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score6" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Objeto:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word7" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score7" placeholder="Pontuação">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Profissão:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word8" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score8" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Verbo:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word9" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score9" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Filme:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word10" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score10" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Flor:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word11" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score11" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Marca:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word12" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score12" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Comida:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word13" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score13" placeholder="Pontuação">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Carro:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="word14" placeholder="Palavra">
+                    <input type="number" class="form-control" id="score14" placeholder="Pontuação">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="timer" id="timer">Tempo: 02:00</div>
+    <button id="startTimerBtn" class="btn btn-warning mt-2">Iniciar Relógio</button>
+    
+    <!-- Botão para limpar as palavras -->
+    <button id="clearWordsBtn" class="btn btn-danger mt-2">Limpar Palavras</button>
+
+    <div class="finished" id="result"></div>
+    <div class="history" id="history"></div>
+
+    <button id="calculateScoreBtn" class="btn btn-success mt-2">Calcular Pontos</button>
+    <div class="finished" id="totalScore">Pontuação Total: 0</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    let totalPoints = 0;
+    let roundsHistory = [];
+    let timerInterval;
+    let timeRemaining = 120; // 2 minutos
+    let usedLetters = [];
+
+    function updateHistory() {
+        const historyElement = document.getElementById('history');
+        historyElement.innerHTML = roundsHistory.map(entry => `<div>${entry}</div>`).join('');
+    }
+
+    function updateTimer() {
+        const timerElement = document.getElementById('timer');
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+
+        timerElement.textContent = `Tempo: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        if (timeRemaining > 0) {
+            timeRemaining--;
+        } else {
+            clearInterval(timerInterval);
+            alert('O tempo acabou!');
+        }
+    }
+
+    document.getElementById('generateLetterBtn').addEventListener('click', () => {
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let randomLetter = '';
+
+        // Gera uma nova letra que ainda não foi usada
+        do {
+            randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+        } while (usedLetters.includes(randomLetter));
+
+        usedLetters.push(randomLetter);
+        document.getElementById('selectedLetter').textContent = `Letra: ${randomLetter}`;
+    });
+
+    document.getElementById('startTimerBtn').addEventListener('click', () => {
+        clearInterval(timerInterval);
+        timeRemaining = 120; // 2 minutos
+        updateTimer();
+        timerInterval = setInterval(updateTimer, 1000);
+    });
+
+    document.getElementById('clearWordsBtn').addEventListener('click', () => {
+        document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+        document.querySelectorAll('input[type="number"]').forEach(input => input.value = '');
+    });
+
+    document.getElementById('calculateScoreBtn').addEventListener('click', () => {
+        const words = [
+            document.getElementById('word1').value,
+            document.getElementById('word2').value,
+            document.getElementById('word3').value,
+            document.getElementById('word4').value,
+            document.getElementById('word5').value,
+            document.getElementById('word6').value,
+            document.getElementById('word7').value,
+            document.getElementById('word8').value,
+            document.getElementById('word9').value,
+            document.getElementById('word10').value,
+            document.getElementById('word11').value,
+            document.getElementById('word12').value,
+            document.getElementById('word13').value,
+            document.getElementById('word14').value,
+        ];
+
+        const scores = [
+            Number(document.getElementById('score1').value),
+            Number(document.getElementById('score2').value),
+            Number(document.getElementById('score3').value),
+            Number(document.getElementById('score4').value),
+            Number(document.getElementById('score5').value),
+            Number(document.getElementById('score6').value),
+            Number(document.getElementById('score7').value),
+            Number(document.getElementById('score8').value),
+            Number(document.getElementById('score9').value),
+            Number(document.getElementById('score10').value),
+            Number(document.getElementById('score11').value),
+            Number(document.getElementById('score12').value),
+            Number(document.getElementById('score13').value),
+            Number(document.getElementById('score14').value),
+        ];
+
+        const roundPoints = scores.reduce((acc, score) => acc + score, 0);
+        totalPoints += roundPoints;
+
+        const currentRound = words.map((word, index) => `${word} - ${scores[index]} pontos`).join(' | ');
+        roundsHistory.push(`Rodada ${roundsHistory.length + 1}: ${currentRound}`);
+
+        document.getElementById('result').textContent = `Resultado da Rodada: ${roundPoints} pontos`;
+        document.getElementById('totalScore').textContent = `Pontuação Total: ${totalPoints}`;
+        updateHistory();
+    });
+</script>
+</body>
+</html>
