@@ -1,0 +1,9 @@
+function doPost(e) {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const round = e.parameter.round; // Recebe o número da rodada
+    const score = e.parameter.score; // Recebe a pontuação da rodada
+
+    // Adiciona uma nova linha com a data, rodada e pontuação
+    sheet.appendRow([new Date(), round, score]);
+    
+    return ContentService.createTextOutput("Dados recebidos com sucesso.");
