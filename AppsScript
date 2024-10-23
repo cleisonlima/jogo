@@ -1,9 +1,19 @@
-function doPost(e) {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    const round = e.parameter.round; // Recebe o número da rodada
-    const score = e.parameter.score; // Recebe a pontuação da rodada
-
-    // Adiciona uma nova linha com a data, rodada e pontuação
-    sheet.appendRow([new Date(), round, score]);
+document.getElementById('calculateScoreBtn').addEventListener('click', () => {
+    const scores = Array.from({ length: 14 }, (_, i) => Number(document.getElementById(`score${i + 1}`).value));
+    const roundPoints = scores.reduce((acc, score) => acc + score, 0);
     
-    return ContentService.createTextOutput("Dados recebidos com sucesso.");
+    // Verifica se já existe um resultado para a rodada atual
+    if (roundsHistory.length === 0 || !roundsHistory[roundsHistory.length - 1].includes(`Rodada ${roundsHistory.length + 1}`)) {
+        totalPoints += roundPoints;
+
+        const currentRound = roundsHistory.length + 1;
+        const roundResult = `Rodada ${currentRound}: LETRA: ${currentLetter} Pontuação: ${roundPoints} pontos`;
+        roundsHistory.push(roundResult);
+
+        document.getElementById('result').textContent = roundResult;
+        document.getElementById('totalScore').textContent = `Pontuação Total: ${totalPoints}`;
+        updateHistory();
+    } else {
+        alert('Resultado da rodada já calculado.');
+    }
+});
